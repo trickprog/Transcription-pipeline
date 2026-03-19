@@ -45,6 +45,9 @@ Each subprocess needs to be a standalone script. `worker.py` loads Whisper, tran
 ### Using proxy React through Flask
 During development, React runs on port 3000 and Flask on port 5000. The `proxy` field in `package.json` forwards `/api/*` requests to Flask, avoiding CORS issues without extra configuration.
 
+### Using FP32 instead of FP16
+Whisper defaults to FP16 (half-precision) for faster inference, but FP16 requires an NVIDIA GPU with CUDA. Since this project runs on CPU, we explicitly set `fp16=False` to use FP32 (full-precision). Same accuracy, just no GPU acceleration.
+
 ### Using ffmpeg
 Whisper only understands raw audio waveforms. ffmpeg decodes all supported formats (MP3, WAV, M4A, OGG, FLAC, WEBM) into waveform data that Whisper can process. Without it, only WAV files would work.
 
